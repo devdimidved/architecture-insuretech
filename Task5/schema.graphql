@@ -1,0 +1,36 @@
+type Query {
+  # Получить клиента по ID с возможностью выбрать нужные поля и связанные сущности
+  client(id: ID!): Client
+
+  # Получить документы клиента (можно использовать вложенный запрос через client)
+  documents(clientId: ID!): [Document]
+
+  # Получить родственников клиента (можно использовать вложенный запрос через client)
+  relatives(clientId: ID!): [Relative]
+}
+
+# Тип "Клиент"
+type Client {
+  id: ID!
+  name: String!
+  age: Int!
+  documents: [Document]!  # Связь с документами
+  relatives: [Relative]!   # Связь с родственниками
+}
+
+# Тип "Документ"
+type Document {
+  id: ID!
+  type: String!
+  number: String!
+  issueDate: String!
+  expiryDate: String!
+}
+
+# Тип "Родственник"
+type Relative {
+  id: ID!
+  relationType: String!
+  name: String!
+  age: Int!
+}
